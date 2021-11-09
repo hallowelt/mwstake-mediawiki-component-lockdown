@@ -1,0 +1,1 @@
+# mwstake-mediawiki-component-lockdown
