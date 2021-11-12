@@ -1,11 +1,25 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MWStake\MediaWiki\Component\Lockdown\Factory;
+use MWStake\MediaWiki\Component\Lockdown\ModuleFactory;
 
 return [
-	'MWStakeLockdownFactory' => function ( MediaWikiServices $services ) {
+	'MWStakeLockdownModuleFactory' => function ( MediaWikiServices $services ) {
 		$registry = $services->getService( 'MWStakeManifestRegistryFactory' )
 			->get( 'MWStakeLockdownRegistry' );
-		return new LockdownFactory( $registry, $GLOBALS['mwsgLockdownRegistry'] );
+		return new ModuleFactory(
+			$registry,
+			!empty( $GLOBALS['mwsgLockdownRegistry'] ) ? $GLOBALS['mwsgLockdownRegistry'] : [],
+			$services->getConfigFactory(),
+			// legacy
+			$services
+		);
+	},
+	'MWStakeLockdown' => function ( MediaWikiServices $services ) {
+		return new Factory(
+			$services->getConfigFactory(),
+			$services->getService( 'MWStakeLockdownModuleFactory' )
+		);
 	}
 ];

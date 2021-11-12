@@ -1,6 +1,6 @@
 <?php
 
-namespace MWStake\MediaWiki\Component;
+namespace MWStake\MediaWiki\Component\Lockdown;
 
 use Config;
 use Status;
