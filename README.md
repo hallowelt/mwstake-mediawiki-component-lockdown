@@ -9,9 +9,9 @@ Provides an services and classes for lockdown on permissions on single pages
 
 Add `"mwstake/mediawiki-component-lockdown": "~1.0"` to the `require` section of your `composer.json` file.
 
-### Implement a provider
+### Implement a module
 
-Create a class that implements `MWStake\MediaWiki\Component\AlertBanners\IHandler`. For convenience you may want to derive directly from the abstract base class `MWStake\MediaWiki\Component\AlertBanners\AlertProviderBase`
+Create a class that implements `MWStake\MediaWiki\Component\Lockdown\IModule`. For convenience you may want to derive directly from the abstract base class `MWStake\MediaWiki\Component\Lockdown\Module`.
 
 ### Register a module
 
