@@ -1,15 +1,18 @@
 <?php
 
-if ( defined( 'MWSTAKE_MEDIAWIKI_COMPONENT_MANIFESTREGISTRY_VERSION' ) ) {
+if ( defined( 'MWSTAKE_MEDIAWIKI_COMPONENT_LOCKDOWN_VERSION' ) ) {
 	return;
 }
 
-define( 'MWSTAKE_MEDIAWIKI_COMPONENT_MANIFESTREGISTRY_VERSION', '1.0.0' );
+define( 'MWSTAKE_MEDIAWIKI_COMPONENT_LOCKDOWN_VERSION', '1.0.0' );
 
-if ( !isset( $GLOBALS['mwsgLockdownRegistry'] ) ) {
-	$GLOBALS['mwsgLockdownRegistry'] = [];
-}
-$GLOBALS['wgServiceWiringFiles'][] = __DIR__ . '/includes/ServiceWiring.php';
+MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()
+->register( 'lockdown', function () {
+	if ( !isset( $GLOBALS['mwsgLockdownRegistry'] ) ) {
+		$GLOBALS['mwsgLockdownRegistry'] = [];
+	}
+	$GLOBALS['wgServiceWiringFiles'][] = __DIR__ . '/includes/ServiceWiring.php';
 
-$GLOBALS['wgHooks']['GetUserPermissionsErrors'][] = "\\MWStake\\MediaWiki\\Component\\Lockdown"
-	. "\\Hook\\ApplyLockdown::onGetUserPermissionsErrors";
+	$GLOBALS['wgHooks']['GetUserPermissionsErrors'][] = "\\MWStake\\MediaWiki\\Component\\Lockdown"
+		. "\\Hook\\ApplyLockdown::onGetUserPermissionsErrors";
+} );
