@@ -11,15 +11,15 @@ return [
 		return new ModuleFactory(
 			$registry,
 			!empty( $GLOBALS['mwsgLockdownRegistry'] ) ? $GLOBALS['mwsgLockdownRegistry'] : [],
-			$services->getConfigFactory(),
+			$services->getMainConfig(),
 			// legacy
 			$services
 		);
 	},
 	'MWStakeLockdown' => function ( MediaWikiServices $services ) {
 		return new Factory(
-			$services->getConfigFactory(),
-			$services->getService( 'MWStakeLockdownModuleFactory' )
+			$services->getService( 'MWStakeLockdownModuleFactory' ),
+			$services->getMainConfig()
 		);
 	}
 ];

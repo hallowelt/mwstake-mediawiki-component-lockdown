@@ -2,12 +2,14 @@
 
 namespace MWStake\MediaWiki\Component\Lockdown;
 
+use IContextSource;
+
 interface IModuleFactory {
 
 	/**
-	 * @param IModule[] $modules
+	 * @param IContextSource $context
 	 * @return IModule[]
 	 */
-	public function getModules(): array;
+	public function getModules( IContextSource $context ): array;
 
 }

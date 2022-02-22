@@ -2,7 +2,7 @@
 
 namespace MWStake\MediaWiki\Component\Lockdown;
 
-use ConfigFactory;
+use Config;
 use Exception;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
@@ -14,22 +14,22 @@ class ModuleFactory implements IModuleFactory {
 	/**
 	 * @var IRegistry
 	 */
-	protected $registry = null;
+	protected $registry;
 
 	/**
-	 * @var ConfigFactory
+	 * @var Config
 	 */
-	protected $configFactory = null;
+	protected $config;
 
 	/**
 	 * @var MediaWikiServices
 	 */
-	protected $services = null;
+	protected $services;
 
 	/**
 	 * @var array
 	 */
-	protected $globalRegistry = null;
+	protected $globalRegistry;
 
 	/**
 	 *
@@ -40,13 +40,14 @@ class ModuleFactory implements IModuleFactory {
 	/**
 	 *
 	 * @param IRegistry $registry
-	 * @param ConfigFactory $configFactory
-	 * @param IContextSource $context
+	 * @param array $globalRegistry
+	 * @param Config $config
+	 * @param MediaWikiServices $services
 	 */
 	public function __construct( IRegistry $registry, array $globalRegistry,
-		ConfigFactory $configFactory, MediaWikiServices $services ) {
+		Config $config, MediaWikiServices $services ) {
 		$this->registry = $registry;
-		$this->configFactory = $configFactory;
+		$this->config = $config;
 		$this->globalRegistry = $globalRegistry;
 		$this->services = $services;
 	}
@@ -61,7 +62,7 @@ class ModuleFactory implements IModuleFactory {
 			if ( is_string( $definition ) && is_callable( $definition ) ) {
 				// legacy
 				$module = call_user_func_array( $definition, [
-					$this->configFactory->makeConfig( 'wg' ),
+					$this->config,
 					$context,
 					$this->services,
 				] );

@@ -2,7 +2,7 @@
 
 namespace MWStake\MediaWiki\Component\Lockdown;
 
-use ConfigFactory;
+use Config;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
@@ -16,12 +16,12 @@ class Factory implements IFactory {
 	/**
 	 * @var IModuleFactory
 	 */
-	protected $moduleFactory = null;
+	protected $moduleFactory;
 
 	/**
-	 * @var ConfigFactory
+	 * @var Config
 	 */
-	protected $configFactory = null;
+	protected $config;
 
 	/**
 	 * @var Lockdown[]
@@ -31,12 +31,11 @@ class Factory implements IFactory {
 	/**
 	 *
 	 * @param IModuleFactory $moduleFactory
-	 * @param ConfigFactory $configFactory
-	 * @param IContextSource $context
+	 * @param Config $config
 	 */
-	public function __construct( IModuleFactory $moduleFactory, ConfigFactory $configFactory ) {
+	public function __construct( IModuleFactory $moduleFactory, Config $config ) {
 		$this->moduleFactory = $moduleFactory;
-		$this->configFactory = $configFactory;
+		$this->config = $config;
 	}
 
 	/**
@@ -66,7 +65,7 @@ class Factory implements IFactory {
 	 */
 	protected function newLockdown( Title $title, User $user, IContextSource $context ): Lockdown {
 		$lockdown = new Lockdown(
-			$this->configFactory,
+			$this->config,
 			$title,
 			$user,
 			$this->moduleFactory->getModules( $context )

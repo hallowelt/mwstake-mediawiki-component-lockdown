@@ -19,9 +19,10 @@ MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()
 	if ( !isset( $GLOBALS['mwsgLockdownRegistry'] ) ) {
 		$GLOBALS['mwsgLockdownRegistry'] = [];
 	}
+	if ( !isset( $GLOBALS['mwsgLockdownGroupModuleRegistry'] ) ) {
+		$GLOBALS['mwsgLockdownGroupModuleRegistry'] = [];
+	}
 	$GLOBALS['wgServiceWiringFiles'][] = __DIR__ . '/includes/ServiceWiring.php';
-
-	$GLOBALS['wgHooks']['GetUserPermissionsErrors'][] = "\\MWStake\\MediaWiki\\Component\\Lockdown"
+	$GLOBALS['wgHooks']['getUserPermissionsErrors'][] = "\\MWStake\\MediaWiki\\Component\\Lockdown"
 		. "\\Hook\\ApplyLockdown::onGetUserPermissionsErrors";
-
 } );
