@@ -1,13 +1,19 @@
 ## MediaWiki Stakeholders Group - Components
 # Lockdown for MediaWiki
 
-Provides an services and classes for lockdown on permissions on single pages
+Provides a service and classes for permission lockdown on single pages
 
 **This code is meant to be executed within the MediaWiki application context. No standalone usage is intended.**
 
 ## Use in a MediaWiki extension
 
 Add `"mwstake/mediawiki-component-lockdown": "~1.0"` to the `require` section of your `composer.json` file.
+
+Explicit initialization is required. This can be archived by
+- either adding `"callback": "mwsInitComponents"` to your `extension.json`/`skin.json`
+- or calling `mwsInitComponents();` within you extensions/skins custom `callback` method
+
+See also [`mwstake/mediawiki-componentloader`](https://github.com/hallowelt/mwstake-mediawiki-componentloader).
 
 ### Implement a module
 
