@@ -6,6 +6,7 @@ use Config;
 use Exception;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
+use MWStake\MediaWiki\Component\Lockdown\Module\NULLModule;
 use MWStake\MediaWiki\Component\ManifestRegistry\IRegistry;
 use Wikimedia\ObjectFactory;
 
@@ -57,6 +58,7 @@ class ModuleFactory implements IModuleFactory {
 	 * @return Module[]
 	 */
 	public function getModules( IContextSource $context ): array {
+		# error_log(var_export($this->getModuleDefinitions(),1));
 		foreach ( $this->getModuleDefinitions() as $key => $definition ) {
 			$module = null;
 			if ( is_string( $definition ) && is_callable( $definition ) ) {
@@ -70,11 +72,11 @@ class ModuleFactory implements IModuleFactory {
 				try {
 					$module = ObjectFactory::getObjectFromSpec( $definition );
 				} catch ( Exception $e ) {
-					$module = new NULLModule;
+					$module = NULLModule::getInstance( $this->config, $context, $this->services );
 				}
 			}
 			if ( !$module instanceof IModule ) {
-				$module = new NULLModule;
+				$module = NULLModule::getInstance( $this->config, $context, $this->services );
 			}
 			$modules[] = $module;
 		}
