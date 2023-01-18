@@ -8,7 +8,7 @@ use IContextSource;
 use MediaWiki\MediaWikiServices;
 use MWStake\MediaWiki\Component\Lockdown\Module\NULLModule;
 use MWStake\MediaWiki\Component\ManifestRegistry\IRegistry;
-use Wikimedia\ObjectFactory;
+use Wikimedia\ObjectFactory\ObjectFactory;
 
 class ModuleFactory implements IModuleFactory {
 
