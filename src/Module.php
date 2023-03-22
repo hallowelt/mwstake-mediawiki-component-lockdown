@@ -2,7 +2,6 @@
 
 namespace MWStake\MediaWiki\Component\Lockdown;
 
-use BlueSpice\IServiceProvider;
 use Config;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
@@ -10,7 +9,7 @@ use Message;
 use MessageLocalizer;
 use User;
 
-abstract class Module implements IModule, IServiceProvider, MessageLocalizer {
+abstract class Module implements IModule, MessageLocalizer {
 
 	/**
 	 *
