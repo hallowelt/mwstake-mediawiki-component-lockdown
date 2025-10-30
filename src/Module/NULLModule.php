@@ -21,7 +21,7 @@ class NULLModule extends Module {
 	/**
 	 * @param Title $title
 	 * @param User $user
-	 * @param type $action
+	 * @param string $action
 	 * @return Message
 	 */
 	public function getLockdownReason( Title $title, User $user, $action ): Message {
@@ -31,7 +31,7 @@ class NULLModule extends Module {
 	/**
 	 * @param Title $title
 	 * @param User $user
-	 * @param type $action
+	 * @param string $action
 	 * @return bool
 	 */
 	public function mustLockdown( Title $title, User $user, $action ): bool {

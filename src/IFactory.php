@@ -17,7 +17,7 @@ interface IFactory {
 	 * @return Lockdown
 	 */
 	public function newFromTitleAndUserRelation( Title $title, User $user,
-		IContextSource $context = null ): Lockdown;
+		?IContextSource $context = null ): Lockdown;
 
 	/**
 	 * @param Title $title
@@ -30,6 +30,6 @@ interface IFactory {
 	 * @param IContextSource|null $context
 	 * @return Status
 	 */
-	public function userCan( Title $title, $action = 'read', User $user = null,
-		$rigor = PermissionManager::RIGOR_SECURE, IContextSource $context = null ): Status;
+	public function userCan( Title $title, $action = 'read', ?User $user = null,
+		$rigor = PermissionManager::RIGOR_SECURE, ?IContextSource $context = null ): Status;
 }

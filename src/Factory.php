@@ -45,7 +45,7 @@ class Factory implements IFactory {
 	 * @return Lockdown
 	 */
 	public function newFromTitleAndUserRelation( Title $title, User $user,
-		IContextSource $context = null ): Lockdown {
+		?IContextSource $context = null ): Lockdown {
 		if ( !$context ) {
 			$context = RequestContext::getMain();
 		}
@@ -106,8 +106,8 @@ class Factory implements IFactory {
 	 * @param IContextSource|null $context
 	 * @return Status
 	 */
-	public function userCan( Title $title, $action = 'read', User $user = null,
-		$rigor = PermissionManager::RIGOR_SECURE, IContextSource $context = null ): Status {
+	public function userCan( Title $title, $action = 'read', ?User $user = null,
+		$rigor = PermissionManager::RIGOR_SECURE, ?IContextSource $context = null ): Status {
 		$status = Status::newGood();
 		if ( !$context ) {
 			$context = RequestContext::getMain();

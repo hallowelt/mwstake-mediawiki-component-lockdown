@@ -15,7 +15,7 @@ if ( !defined( 'MWSTAKE_MEDIAWIKI_COMPONENTLOADER_VERSION' ) ) {
 define( 'MWSTAKE_MEDIAWIKI_COMPONENT_LOCKDOWN_VERSION', '1.0.1' );
 
 MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()
-->register( 'lockdown', function () {
+->register( 'lockdown', static function () {
 	if ( !isset( $GLOBALS['mwsgLockdownRegistry'] ) ) {
 		$GLOBALS['mwsgLockdownRegistry'] = [];
 	}
